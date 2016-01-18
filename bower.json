@@ -1,0 +1,23 @@
+{
+  "name": "mtconnect-viewer",
+  "authors": [
+    "Phil Coltrane <phil.m.coltrane@gmail.com>"
+  ],
+  "description": "a simple mtconnect agent viewer",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-ui": "~0.4.0",
+    "angular": "~1.4.8",
+    "angular-ui-router": "~0.2.15"
+  }
+}
