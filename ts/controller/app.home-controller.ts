@@ -5,14 +5,16 @@ module MTConnectViewer{
     
     export class HomeController{
     
-        public static factory(){
-            return new HomeController();
+        public static factory($state){
+            return new HomeController($state);
         }
         
-        public constructor(){
-            console.log("Setup home controller")
+        public constructor(private $state){
+            console.log("Setup home controller");
+            console.log($state);
         }
     }
     
+    HomeController.factory.$inject = ['$state'];
     MTConnectViewer.appModule.controller('homeCtrl', MTConnectViewer.HomeController.factory)
 }

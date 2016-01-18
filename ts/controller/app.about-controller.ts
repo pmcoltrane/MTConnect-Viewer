@@ -14,5 +14,6 @@ module MTConnectViewer{
         }
     }
     
+    AboutController.factory.$inject = [];
     MTConnectViewer.appModule.controller('aboutCtrl', MTConnectViewer.AboutController.factory)
 }
