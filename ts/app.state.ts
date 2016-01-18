@@ -18,12 +18,12 @@ module MTConnectViewer{
                 .state('home', {
                     url: '/',
                     templateUrl: 'template/home.html',
-                    controller: 'HomeController'
+                    controller: 'homeCtrl'
                 })
                 .state('about', {
                     url: '/about',
                     templateUrl: 'template/about.html',
-                    controller: 'AboutController'
+                    controller: 'aboutCtrl'
                 });
         }
         

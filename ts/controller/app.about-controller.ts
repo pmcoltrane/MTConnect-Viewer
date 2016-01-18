@@ -10,9 +10,9 @@ module MTConnectViewer{
         }
         
         public constructor(){
-            console.log("Setup home controller")
+            console.log("Setup about controller")
         }
     }
     
-    MTConnectViewer.appModule.controller('aboutCtrl', [AboutController.factory])
+    MTConnectViewer.appModule.controller('aboutCtrl', MTConnectViewer.AboutController.factory)
 }

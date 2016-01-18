@@ -14,5 +14,5 @@ module MTConnectViewer{
         }
     }
     
-    MTConnectViewer.appModule.controller('homeCtrl', [HomeController.factory])
+    MTConnectViewer.appModule.controller('homeCtrl', MTConnectViewer.HomeController.factory)
 }
