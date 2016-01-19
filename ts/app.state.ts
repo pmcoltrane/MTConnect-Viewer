@@ -26,7 +26,14 @@ module MTConnectViewer{
                     templateUrl: 'template/about.html',
                     controller: 'aboutCtrl',
                     controllerAs: 'aboutCtrl'
-                });
+                })
+                .state('device', {
+                    url: '/device/:device',
+                    templateUrl: 'template/device.html',
+                    controller: 'deviceCtrl',
+                    controllerAs: 'deviceCtrl'
+                })
+                ;
         }
         
     }

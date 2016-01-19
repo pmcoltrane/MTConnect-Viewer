@@ -1,0 +1,16 @@
+<div>
+    <h1>device {{deviceCtrl.name}}</h1>
+    <h2 ng-show="!!deviceCtrl.device.Description._manufacturer">Mfr: {{deviceCtrl.device.Description._manufacturer}}</h2>
+
+    <h2>components</h2>
+
+    <ul>
+        <li ng-repeat="component in deviceCtrl.device.Components">{{component._name}}</li>
+    </ul>
+
+    <h2>data items</h2>
+
+    <ul>
+        <li ng-repeat="item in deviceCtrl.device.DataItems.DataItem">{{item._name || item._id}}</li>
+    </ul>
+</div>

@@ -3,6 +3,6 @@
 
     <ul>
         <li ng-hide="homeCtrl.devicesDocument">No devices</li>
-        <li ng-show="homeCtrl.devicesDocument" ng-repeat="device in homeCtrl.devicesDocument.Devices">{{device._name}}</li>
+        <li ng-show="homeCtrl.devicesDocument" ng-repeat="device in homeCtrl.devicesDocument"><button ng-click="homeCtrl.viewDevice(device._name)">{{device._name}}</button></li>
     </ul>
 </div>

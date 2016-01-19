@@ -7,17 +7,17 @@ module MTConnectViewer {
 
         public devicesDocument: any;
 
-        public constructor(private $state, private agent: IAgent, private $scope: angular.IScope, private $timeout: angular.ITimeoutService) {
-            agent.getDevices()
-            .then(result => {
-                $timeout(() => {
-                    this.devicesDocument = result.MTConnectDevices;
+        public constructor(private $state: angular.ui.IStateService, private agent: IAgent, private $scope: angular.IScope, private $timeout: angular.ITimeoutService) {
+            agent.devices.then(devices => {
+                $timeout(()=> {
+                    this.devicesDocument = devices;
                 }, 0);
             })
-            .catch(err => {
-                console.error(err);
-            })
             ;
+        }
+        
+        public viewDevice = (name: string) => {
+            this.$state.go('device', {device: name});
         }
         
     }
