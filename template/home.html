@@ -1,1 +1,8 @@
-<h1>Home</h1>
+<div>
+    <h1>Home</h1>
+
+    <ul>
+        <li ng-hide="homeCtrl.devicesDocument">No devices</li>
+        <li ng-show="homeCtrl.devicesDocument" ng-repeat="device in homeCtrl.devicesDocument.Devices">{{device._name}}</li>
+    </ul>
+</div>

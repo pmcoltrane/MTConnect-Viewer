@@ -18,16 +18,18 @@ module MTConnectViewer{
                 .state('home', {
                     url: '/',
                     templateUrl: 'template/home.html',
-                    controller: 'homeCtrl'
+                    controller: 'homeCtrl',
+                    controllerAs: 'homeCtrl'
                 })
                 .state('about', {
                     url: '/about',
                     templateUrl: 'template/about.html',
-                    controller: 'aboutCtrl'
+                    controller: 'aboutCtrl',
+                    controllerAs: 'aboutCtrl'
                 });
         }
         
     }
    
-    MTConnectViewer.appModule.config(['$stateProvider', '$urlRouterProvider', AppState.factory]);
+    MTConnectViewer.app.config(['$stateProvider', '$urlRouterProvider', AppState.factory]);
 }

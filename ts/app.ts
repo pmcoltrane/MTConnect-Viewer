@@ -4,7 +4,6 @@
 
 module MTConnectViewer{
 
-    console.log('appModule');    
-    export var appModule = angular.module('mtconnect-viewer', ['ui.router']);
+    export var app = angular.module('mtconnect-viewer', ['ui.router']);
     
 }

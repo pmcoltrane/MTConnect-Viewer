@@ -4,16 +4,12 @@
 module MTConnectViewer{
     
     export class AboutController{
-    
-        public static factory(){
-            return new AboutController();
-        }
         
         public constructor(){
             console.log("Setup about controller")
         }
     }
     
-    AboutController.factory.$inject = [];
-    MTConnectViewer.appModule.controller('aboutCtrl', MTConnectViewer.AboutController.factory)
+    AboutController.$inject = [];
+    MTConnectViewer.app.controller('aboutCtrl', MTConnectViewer.AboutController);
 }
