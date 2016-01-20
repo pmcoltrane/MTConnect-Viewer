@@ -1,7 +1,8 @@
+<h1>Devices <i class="material-icons">devices_other</i> </h1>
 <md-tabs class="md-dynamic-height md-border-bottom md-autoselect ng-cloak">
-
-    <md-tab ng-repeat="device in homeCtrl.devicesDocument" label="{{device._name||device._uid}}">
-        <md-card>
+    <md-tab ng-repeat="device in homeCtrl.devicesDocument">
+        <md-tab-label>{{device._name||device._uid}}</md-tab-label>
+        <md-tab-body>
             <md-list>
                 <md-subheader>Components</md-subheader>
                 <md-list-item class="md-3-line" ng-repeat="component in device.Components">
@@ -21,6 +22,6 @@
                     </div>
                 </md-list-item>
             </md-list>
-        </md-card>
+        </md-tab-body>
     </md-tab>
 </md-tabs>
