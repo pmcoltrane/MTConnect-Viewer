@@ -1,16 +1,24 @@
-<div>
-    <h1>device {{deviceCtrl.name}}</h1>
-    <h2 ng-show="!!deviceCtrl.device.Description._manufacturer">Mfr: {{deviceCtrl.device.Description._manufacturer}}</h2>
-
-    <h2>components</h2>
-
-    <ul>
-        <li ng-repeat="component in deviceCtrl.device.Components">{{component._name}}</li>
-    </ul>
-
-    <h2>data items</h2>
-
-    <ul>
-        <li ng-repeat="item in deviceCtrl.device.DataItems.DataItem">{{item._name || item._id}}</li>
-    </ul>
-</div>
+<md-content layout-align="center center" layout="column">
+    <md-card>
+        <h2>{{deviceCtrl.name || deviceCtrl.uid}}</h2>
+        <md-list>
+            <md-subheader>Components</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="component in deviceCtrl.device.Components">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{component._name || component._id}}</h3>
+                    <h4>Line 2</h4>
+                    <p>Line 3</p>
+                </div>
+            </md-list-item>
+            <md-divider></md-divider>
+            <md-subheader>DataItems</md-subheader>
+            <md-list-item class="md-3-line" ng-repeat="item in deviceCtrl.device.DataItems.DataItem">
+                <div class="md-list-item-text" layout="column">
+                    <h3>{{item._name || item._id}}</h3>
+                    <h4>Line 2</h4>
+                    <p>Line 3</p>
+                </div>
+            </md-list-item>
+        </md-list>
+    </md-card>
+</md-content>

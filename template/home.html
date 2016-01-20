@@ -1,8 +1,26 @@
-<div>
-    <h1>Home</h1>
+<md-tabs class="md-dynamic-height md-border-bottom md-autoselect ng-cloak">
 
-    <ul>
-        <li ng-hide="homeCtrl.devicesDocument">No devices</li>
-        <li ng-show="homeCtrl.devicesDocument" ng-repeat="device in homeCtrl.devicesDocument"><button ng-click="homeCtrl.viewDevice(device._name)">{{device._name}}</button></li>
-    </ul>
-</div>
+    <md-tab ng-repeat="device in homeCtrl.devicesDocument" label="{{device._name||device._uid}}">
+        <md-card>
+            <md-list>
+                <md-subheader>Components</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="component in device.Components">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{component._name || component._id}}</h3>
+                        <h4>Line 2</h4>
+                        <p>Line 3</p>
+                    </div>
+                </md-list-item>
+                <md-divider></md-divider>
+                <md-subheader>DataItems</md-subheader>
+                <md-list-item class="md-3-line" ng-repeat="item in device.DataItems.DataItem">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{item._name || item._id}}</h3>
+                        <h4>Line 2</h4>
+                        <p>Line 3</p>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-card>
+    </md-tab>
+</md-tabs>
