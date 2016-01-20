@@ -1,4 +1,19 @@
-<h1>Devices <i class="material-icons">devices_other</i> </h1>
+<md-toolbar>
+    <div class="md-toolbar-tools">
+        <md-button class="md-icon-button" aria-label="Devices">
+            <i class="material-icons">devices_other</i>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="History">
+            <i class="material-icons">history</i>
+        </md-button>
+        <md-button class="md-icon-button" aria-label="Notifications">
+            <i class="material-icons">notifications</i>
+        </md-button>
+                <md-button class="md-icon-button" aria-label="Settings">
+            <i class="material-icons">settings</i>
+        </md-button>
+    </div>
+</md-toolbar>
 <md-tabs class="md-dynamic-height md-border-bottom md-autoselect ng-cloak">
     <md-tab ng-repeat="device in homeCtrl.devicesDocument">
         <md-tab-label>{{device._name||device._uid}}</md-tab-label>
