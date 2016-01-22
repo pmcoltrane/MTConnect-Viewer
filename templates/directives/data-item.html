@@ -1,0 +1,7 @@
+<h3>{{item._name || item._id}} [{{item._type}}]</h3>
+<div layout="row">
+    <i aria-label="SAMPLE" ng-show="{{item._category=='SAMPLE'}}" class="material-icons">camera</i>
+    <i aria-label="EVENT" ng-show="{{item._category==='EVENT'}}" class="material-icons">flash_on</i>
+    <i aria-label="CONDITION" ng-show="{{item._category=='CONDITION'}}" class="material-icons">check_circle</i>
+    <h4>current value and units</h4>
+</div>

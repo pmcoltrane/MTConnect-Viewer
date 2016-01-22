@@ -17,7 +17,7 @@ module MTConnectViewer{
             $stateProvider
                 .state('home', {
                     url: '/',
-                    templateUrl: 'template/home.html',
+                    templateUrl: 'templates/home.html',
                     controller: 'homeCtrl',
                     controllerAs: 'homeCtrl'
                 })
