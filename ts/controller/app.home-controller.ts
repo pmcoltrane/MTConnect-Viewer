@@ -4,6 +4,7 @@
 module MTConnectViewer {
 
     export class HomeController {
+        public static $inject = ['$state', 'agent', '$scope', '$timeout'];
 
         public devicesDocument: any;
 
@@ -22,6 +23,5 @@ module MTConnectViewer {
         
     }
 
-    HomeController.$inject = ['$state', 'agent', '$scope', '$timeout'];
     MTConnectViewer.app.controller('homeCtrl', MTConnectViewer.HomeController);
 }

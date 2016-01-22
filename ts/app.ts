@@ -4,6 +4,6 @@
 
 module MTConnectViewer{
 
-    export var app = angular.module('mtconnect-viewer', ['ui.router']);
+    export var app = angular.module('mtconnect-viewer', ['ui.router', 'ngMaterial']);
     
 }
