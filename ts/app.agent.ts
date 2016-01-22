@@ -11,8 +11,8 @@ module MTConnectViewer{
     
     export class Agent implements IAgent {
         
-        private _x2js:any;
-        private _devicesDocument:any;
+        private _domParser:DOMParser = new DOMParser();
+        private _devicesDocument:XMLDocument;
         private _devicesTimestamp:Date;
         
         
@@ -20,24 +20,22 @@ module MTConnectViewer{
         
         public get devices():angular.IPromise<any>{
             if(this._devicesDocument){
-                return this.$q.resolve(this._devicesDocument.MTConnectDevices.Devices);
+                return this.$q.resolve(this._devicesDocument);
             }
             else{
-                return this.getDevices().then(() => this._devicesDocument.MTConnectDevices.Devices);
+                return this.getDevices().then(() => this._devicesDocument);
             }
             
         }
         
         public constructor(private $http:angular.IHttpService, private $q:angular.IQService, AGENT_URL:string){
             this.baseUrl = AGENT_URL;
-            this._x2js = new X2JS();
-            
             this.getDevices();
         }
         
         private getDevices = () => {
             return this.$http.get(this.baseUrl)
-            .then(result => this._x2js.xml_str2json(result.data))
+            .then(result => this._domParser.parseFromString(<string>result.data, 'application/xml'))
             .then(result => {
                 this._devicesDocument = result;
                 this._devicesTimestamp = new Date();
