@@ -6,7 +6,8 @@ module MTConnectViewer{
     
     export interface IAgent{
         baseUrl:string;
-        devices:angular.IPromise<any>;
+        devices:angular.IPromise<XMLDocument>;
+        current:angular.IPromise<XMLDocument>;
     }
     
     export class Agent implements IAgent {
@@ -18,14 +19,19 @@ module MTConnectViewer{
         
         public baseUrl:string;
         
-        public get devices():angular.IPromise<any>{
+        public get devices():angular.IPromise<XMLDocument>{
             if(this._devicesDocument){
                 return this.$q.resolve(this._devicesDocument);
             }
             else{
                 return this.getDevices().then(() => this._devicesDocument);
-            }
-            
+            }   
+        }
+        
+        public get current():angular.IPromise<XMLDocument>{
+            return this.$http.get(this.baseUrl + '/current')
+            .then(result => this._domParser.parseFromString(<string>result.data, 'application/xml'))
+            ;
         }
         
         public constructor(private $http:angular.IHttpService, private $q:angular.IQService, AGENT_URL:string){

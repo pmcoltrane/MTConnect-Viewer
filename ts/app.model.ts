@@ -12,6 +12,8 @@ module MTConnectViewer{
         units?:string;
         
         path:IComponent[];
+        value?:any;
+        condition?:string;
     }
     
     export interface IComponent{
