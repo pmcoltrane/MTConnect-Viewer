@@ -4,9 +4,10 @@
 module MTConnectViewer {
 
     export class DataController {
-        public static $inject = ['$state', 'agent', '$scope', '$timeout'];
+        public static $inject = ['$state', 'agent', '$scope', '$timeout', '$interval'];
 
         private _domParser: DOMParser = new DOMParser();
+        private _updateInterval: any;
 
         private processDataItems = () => {
             var items = this.devicesDocument.getElementsByTagName('DataItem');
@@ -47,15 +48,24 @@ module MTConnectViewer {
         public devicesDocument: Document;
         public dataItems: IDataItem[] = [];
 
-        public constructor(private $state: angular.ui.IStateService, private agent: IAgent, private $scope: angular.IScope, private $timeout: angular.ITimeoutService) {
+        public constructor(private $state: angular.ui.IStateService, private agent: IAgent, private $scope: angular.IScope, private $timeout: angular.ITimeoutService, private $interval: angular.IIntervalService) {
             agent.devices.then(devices => {
                 this.devicesDocument = devices;
                 this.processDataItems();
                 $timeout(() => {
                     console.log('processed', this.dataItems.length, 'dataItems');
                 }, 0);
-            })
-                ;
+                
+                this._updateInterval = $interval(this.fetch, 10000);
+                
+                $scope.$on('$destroy', () => {
+                   $interval.cancel(this._updateInterval); 
+                });
+                
+                this.fetch();
+            });
+            
+            
         }
 
         public viewDevice = (name: string) => {

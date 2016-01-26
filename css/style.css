@@ -36,3 +36,23 @@
   /* Support for IE. */
   font-feature-settings: 'liga';
 }
+
+.mtc-dataitem{
+    background: #CCC;
+}
+
+.mtc-unavailable{
+    background: #999;
+}
+
+.mtc-normal{
+    background: #CFC;
+}
+
+.mtc-warning{
+    background: #FFC;
+}
+
+.mtc-fault{
+    background: #FCC;
+}
