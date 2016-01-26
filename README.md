@@ -16,11 +16,16 @@ This is a work-in progress. The code is a mess at present.
 
 In no particular order:
 
--   Cleanup dataitem code
--   Color-code conditions in view
--   Sortable, filterable dataitem view
--   Periodic refresh of dataitem values
--   Fetch using sample since last update, rather than current
--   Graph/historical view of data items
--   Settings page to configure agent location, pinned dataitems
+-   dataitem view
+    -   cleanup code
+    -   better filtering
+    -   sorting
+    -   fetch using sample since last update
+    -   configurable update period
+-   history view
+    -   create history view
+    -   graph / history of data items
+-   settings
+    -   create settings page
+    -   configure agent location
 -   Other things that I've forgotten
