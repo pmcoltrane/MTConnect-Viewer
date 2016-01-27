@@ -15,11 +15,17 @@ module MTConnectViewer{
             $urlRouterProvider.otherwise('/');
             
             $stateProvider
-                .state('home', {
+                .state('view-data', {
                     url: '/',
                     templateUrl: 'templates/data.html',
                     controller: 'dataCtrl',
                     controllerAs: 'dataCtrl'
+                })
+                .state('view-history', {
+                    url: '/history/:id',
+                    templateUrl: 'templates/history.html',
+                    controller: 'historyCtrl',
+                    controllerAs: 'historyCtrl'
                 })
                 ;
         }

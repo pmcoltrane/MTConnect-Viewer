@@ -1,16 +1,22 @@
 <md-list>
     <md-button ng-click="dataCtrl.fetch()"><i class="material-icons">refresh</i> Refresh</md-button>
+    <md-button ng-click="dataCtrl.goHistory('avail')">Test</md-button>
     <md-input-container>
         <label>Filter</label>
-        <input ng-model="dataCtrl.filter"/>
+        <input ng-model="dataCtrl.filter" />
     </md-input-container>
-    <md-grid-list md-padding md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2"
+    <md-grid-list md-padding md-cols-xs="1" md-cols-sm="4" md-cols-md="5" md-cols-gt-md="6" md-row-height-gt-md="16:9" md-row-height="16:9"
     md-gutter="12px" md-gutter-gt-sm="8px">
-        <md-grid-tile ng-repeat="item in dataCtrl.dataItems | filter:dataCtrl.isFiltered" class="mtc-dataitem" ng-class="{'mtc-unavailable': item.value==='UNAVAILABLE', 'mtc-normal': item.condition==='Normal', 'mtc-warning': item.condition==='Warning', 'mtc-fault': item.condition==='Fault'}">
-            <div layout="column" layout-align="center center">
-                <h3 id="{{item.id}}_value">{{item.value || item.condition || '- - -'}}</h3>
+        <md-grid-tile ng-repeat="item in dataCtrl.dataItems | filter:dataCtrl.isFiltered" class="mtc-dataitem" ng-class="{'mtc-unavailable': item.current.value==='UNAVAILABLE', 'mtc-normal': item.current.condition==='Normal', 'mtc-warning': item.current.condition==='Warning', 'mtc-fault': item.current.condition==='Fault'}"
+        ng-mouseenter="itemOptions=true" ng-mouseleave="itemOptions=false"
+        ng-focus="itemOptions=true" ng-blur="itemOptions=false">
+            <div layout="column" layout-fill layout-align="start center" layout-padding>
+                <md-grid-tile-header ng-show="itemOptions">
+                    <a ui-sref="view-history({id: item.id})" aria-label="history" alt="history"><i class="material-icons">history</i></a>
+                </md-grid-tile-header>
+                <strong id="{{item.id}}_value">{{item.current.value || item.current.condition || '- - -'}}</strong>
                 <small ng-show="{{!!item.units}}">{{item.units}}</small>
-                <small ng-show="{{!!item.condition}}">{{item.condition}}</small>
+                <small ng-show="{{!!item.current.condition}}">{{item.current.condition}}</small>
             </div>
             <md-grid-tile-footer layout="column" layout-align="center center">
                 <div>{{item.name || item.id}}</div>

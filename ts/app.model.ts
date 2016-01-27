@@ -12,8 +12,16 @@ module MTConnectViewer{
         units?:string;
         
         path:IComponent[];
+        
+        current?:IDataItemSample;
+        samples?:IDataItemSample[];
+    }
+    
+    export interface IDataItemSample{
         value?:any;
         condition?:string;
+        sequence?:number;
+        timestamp?:Date;
     }
     
     export interface IComponent{

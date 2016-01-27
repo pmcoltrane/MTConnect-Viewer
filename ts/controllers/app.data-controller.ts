@@ -6,7 +6,6 @@ module MTConnectViewer {
     export class DataController {
         public static $inject = ['$state', 'agent', '$scope', '$timeout', '$interval'];
 
-        private _domParser: DOMParser = new DOMParser();
         private _updateInterval: any;
 
         private processDataItems = () => {
@@ -20,7 +19,8 @@ module MTConnectViewer {
                     type: item.getAttribute('type'),
                     id: item.getAttribute('id'),
 
-                    path: []
+                    path: [],
+                    current: {}
                 };
 
                 if (item.hasAttribute('subType')) workingItem.subType = item.getAttribute('subType');
@@ -50,7 +50,7 @@ module MTConnectViewer {
         public filter: string;
 
         public constructor(private $state: angular.ui.IStateService, private agent: IAgent, private $scope: angular.IScope, private $timeout: angular.ITimeoutService, private $interval: angular.IIntervalService) {
-            agent.devices.then(devices => {
+            agent.devices().then(devices => {
                 this.devicesDocument = devices;
                 this.processDataItems();
                 $timeout(() => {
@@ -74,10 +74,9 @@ module MTConnectViewer {
         }
 
         public fetch = () => {
-            this.agent.current.then(dataitems => {
+            this.agent.current().then(dataitems => {
                 var streams = dataitems.getElementsByTagName('ComponentStream');
-                var values: { [id: string]: any } = {};
-                var conditions: { [id: string]: any } = {};
+                var values: { [id: string]: Element } = {};
                 for (var i = 0; i < streams.length; i++) {
                     var stream = streams.item(i);
 
@@ -89,22 +88,21 @@ module MTConnectViewer {
                         var items = samples.item(j).childNodes;
                         for (var k = 0; k < items.length; k++) {
                             if (!(<Element>items.item(k)).getAttribute) continue;
-                            values[(<Element>items.item(k)).getAttribute('dataItemId')] = items.item(k).textContent;
+                            values[(<Element>items.item(k)).getAttribute('dataItemId')] = <Element>items.item(k);
                         }
                     }
                     for (var j = 0; j < events.length; j++) {
                         var items = events.item(j).childNodes;
                         for (var k = 0; k < items.length; k++) {
                             if (!(<Element>items.item(k)).getAttribute) continue;
-                            values[(<Element>items.item(k)).getAttribute('dataItemId')] = items.item(k).textContent;
+                            values[(<Element>items.item(k)).getAttribute('dataItemId')] = <Element>items.item(k);
                         }
                     }
                     for (var j = 0; j < condition.length; j++) {
                         var items = condition.item(j).childNodes;
                         for (var k = 0; k < items.length; k++) {
                             if (!(<Element>items.item(k)).getAttribute) continue;
-                            values[(<Element>items.item(k)).getAttribute('dataItemId')] = items.item(k).textContent;
-                            conditions[(<Element>items.item(k)).getAttribute('dataItemId')] = (<Element>items.item(k)).tagName;
+                            values[(<Element>items.item(k)).getAttribute('dataItemId')] = <Element>items.item(k);
                         }
                     }
                 }
@@ -112,9 +110,12 @@ module MTConnectViewer {
                 for (var i = 0; i < this.dataItems.length; i++) {
                     var dataitem = this.dataItems[i];
                     if (values.hasOwnProperty(dataitem.id)) {
-                        dataitem.value = values[dataitem.id];
+                        var elem = values[dataitem.id];
+                        dataitem.current.value = elem.textContent;
+                        if(dataitem.category==='CONDITION') dataitem.current.condition = elem.tagName;
+                        dataitem.current.sequence = parseInt(elem.getAttribute('sequence'));
+                        dataitem.current.timestamp = new Date(elem.getAttribute('timestamp'));
                     }
-                    if (conditions.hasOwnProperty(dataitem.id)) dataitem.condition = conditions[dataitem.id];
                 }
                 this.$timeout(() => {
                     console.log('processed current dataItems');
@@ -138,6 +139,10 @@ module MTConnectViewer {
             
             console.log('no match with ', dataitem.name);
             return false;
+        }
+        
+        public goHistory = (id:string) => {
+            this.$state.go('view-history', {id: id});
         }
 
     }
