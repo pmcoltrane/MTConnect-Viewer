@@ -1,2 +1,8 @@
 <h3>history placeholder</h3>
-<span ng-repeat="id in historyCtrl.dataItemIds">{{id}}</span>
+<div ng-repeat="(key, value) in historyCtrl.samples">
+    <h3>{{key}}</h3>
+    <div ng-repeat="sample in value">
+        <span>{{sample.timestamp}}</span>
+        <span>{{sample.value}}</span>
+    </div>
+</div>
