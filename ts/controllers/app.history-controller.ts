@@ -11,7 +11,7 @@ module MTConnectViewer {
         public constructor(private $state: angular.ui.IStateService, private agent: IAgent, private $scope: angular.IScope, private $timeout: angular.ITimeoutService, private $interval: angular.IIntervalService) {
             this.dataItemIds = this.$state.params['id'].split(',');
             
-            this.agent.sample(this.dataItemIds)
+            this.agent.getSamples(this.dataItemIds)
             .then(result => {
                console.log(result); 
             });
